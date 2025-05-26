@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kahve Zamanı</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdf6f0;
+      text-align: center;
+    }
+
+    #main {
+      padding: 50px;
+      transition: opacity 1s ease;
+    }
+
+    .coffee-gif {
+      width: 250px;
+      margin: 20px auto;
+      border-radius: 12px;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      font-size: 1.5em;
+      margin: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .yes-btn {
+      background-color: green;
+    }
+
+    .no-btn {
+      background-color: red;
+    }
+
+    #reaction-screen {
+      display: none;
+      height: 100vh;
+      background-color: #000;
+      color: white;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #reaction-screen img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 12px;
+    }
+
+    #reaction-message {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+
+    .fade-out {
+      opacity: 0 !important;
+    }
+
+    .fade-in {
+      display: flex !important;
+      opacity: 1 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="main">
+    <h1>Bir kahve içebilir miyiz?</h1>
+    <img class="coffee-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2RxcW1tZWNzcGYwNWZ0N3hnYnZmM2lqb3Zpd2JzM2x2b2wwb2NoNyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Y7RM7CetuHGOJUoXNv/giphy.gif" alt="Kahve"/>
+
+    <div>
+      <button class="btn yes-btn" onclick="showReaction('yes')">Evet</button>
+      <button class="btn no-btn" onclick="showReaction('no')">Hayır</button>
+    </div>
+  </div>
+
+  <div id="reaction-screen" class="reaction-screen">
+    <img id="reaction-gif" src="" alt="Tepki">
+    <div id="reaction-message"></div>
+  </div>
+
+  <script>
+    function showReaction(answer) {
+      const main = document.getElementById("main");
+      const reactionScreen = document.getElementById("reaction-screen");
+      const reactionGif = document.getElementById("reaction-gif");
+      const reactionMessage = document.getElementById("reaction-message");
+
+      // Önce ana ekranı yavaşça gizle
+      main.classList.add("fade-out");
+
+      setTimeout(() => {
+        main.style.display = "none";
+        
+        // Tepki ekranını hazırlayıp göster
+        if (answer === 'yes') {
+          reactionGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXk1Y2xkdTR1M2R1eGhhN3p5MDgxdG40MG56c2QyM3FwaG96dG4zdiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/1DTBGm5Rfgymk/giphy.gif";
+          reactionMessage.innerText = "Yaaşasın! Kahve vakti ☕🐱";
+        } else {
+          reactionGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmw3bmV6Y3JpeHRycWlxeGJ4cTBvZWZpdnduZTZyZmE0ODBjbGVmZyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CM1rHbKDMH2BW/giphy.gif";
+          reactionMessage.innerText = "Off... O zaman başka zaman 🐾";
+        }
+
+        // Tepki ekranını göster
+        reactionScreen.classList.add("fade-in");
+
+      }, 1000); // fade-out süresiyle senkron
+    }
+  </script>
+
+</body>
+</html>
